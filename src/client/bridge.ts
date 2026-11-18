@@ -35,8 +35,15 @@ interface SlotsFace {
   register(options: Record<string, unknown>, component: unknown): () => void
 }
 
-/** Slot key holding ambient entries below the composer card. */
-const SLOT = 'conversation.composer.dock'
+/**
+ * Slot key holding compact controls at the left of the composer tool row.
+ *
+ * A Session-scope list slot is the only place an outside plugin can pick up the
+ * standard props, and this one renders whenever a Session's composer is mounted.
+ * The ambient `conversation.composer.dock` is declared but not rendered by the
+ * shipped layout, so an entry registered there never mounts.
+ */
+const SLOT = 'conversation.input.left'
 
 /** Actions parked per Session, published by the mounted bridge entry. */
 const held = new Map<string, ComposerActions>()
@@ -59,7 +66,7 @@ interface BridgeProps {
 /**
  * Publish the props it is given and render nothing.
  * @param props - the standard Session slot props.
- * @returns null, so the dock stays visually empty.
+ * @returns null, so the composer row stays visually unchanged.
  */
 function ComposerActionsBridge(props: BridgeProps): null {
   const { sessionId, inputActions } = props
@@ -74,7 +81,7 @@ function ComposerActionsBridge(props: BridgeProps): null {
 }
 
 /**
- * Register the bridge into the composer dock.
+ * Register the bridge into the composer tool row.
  * @param ctx - browser root context.
  * @returns the disposer that removes the entry.
  */
