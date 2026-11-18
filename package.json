@@ -1,0 +1,35 @@
+{
+  "name": "dsh-webui-location",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DSH Web UI 的位置信息插件：把浏览器当前的精确位置一键写进输入框。",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "README.md"
+  ],
+  "dsh": {
+    "client": {
+      "platform": "web"
+    }
+  },
+  "scripts": {
+    "build": "rm -rf lib && tsdown",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node --test test/*.test.ts",
+    "clean": "rm -rf lib"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.1.0",
+    "@types/node": "^22.10.0",
+    "@types/react": "~18.3.1",
+    "tsdown": "^0.23.5",
+    "typescript": "^5.7.0"
+  }
+}
