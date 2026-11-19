@@ -22,11 +22,11 @@
 ## 安装
 
 本包就是一个 bundle（`package.json` 声明 `dsh.bundle.patch`），它自己的
-[cordis.patch.yml](cordis.patch.yml) 里带着那一行。装进 `~/.dsh`（DSH 的配置仓库）只需要：
+[cordis.patch.yml](cordis.patch.yml) 里带着那一行。装进 `$DSH_HOME`（DSH 的配置仓库）只需要：
 
 ```sh
-cd ~/.dsh
-dsh plugin --profile web-plus add ~/.dsh/plugins/dsh-webui-location
+cd "$DSH_HOME"
+dsh plugin --profile web-plus add "$DSH_HOME/plugins/dsh-webui-location"
 ```
 
 这条命令把它记成 `link:` 依赖、加进 profile 的 `dsh.profile.bundles`；profile 的
