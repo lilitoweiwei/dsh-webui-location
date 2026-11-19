@@ -1,0 +1,12 @@
+# dsh-webui-location bundle layer.
+#
+# One row: mount the host half, which is an empty stub whose only job is to make
+# the browser half discoverable. The visible feature — the "位置信息" line in the
+# composer's `+` menu — comes from `dsh.client` in this package's manifest, which
+# `dsh-client-modules` scans; it is not registered here.
+#
+# No config: the plugin has no settings, and `lib/` must be built once in the
+# package directory before this row can import.
+- insert:
+    - id: webui-location
+      name: 'dsh-webui-location'
