@@ -21,26 +21,16 @@
 
 ## 安装
 
-插件以 git submodule + profile patch 行的方式接入 `~/.dsh`（DSH 的配置仓库）：
+本包就是一个 bundle（`package.json` 声明 `dsh.bundle.patch`），它自己的
+[cordis.patch.yml](cordis.patch.yml) 里带着那一行。装进 `~/.dsh`（DSH 的配置仓库）只需要：
 
 ```sh
 cd ~/.dsh
-git submodule add https://github.com/lilitoweiwei/dsh-webui-location.git plugins/dsh-webui-location
+dsh plugin --profile web-plus add ~/.dsh/plugins/dsh-webui-location
 ```
 
-然后在 profile 的 `cordis.patch.yml` 里加一行（路径相对 profile 目录）：
-
-```yaml
-- insert:
-    - id: webui-location
-      name: '../../plugins/dsh-webui-location/lib/index.js'
-```
-
-装好后需要重启一次 DSH Web 服务，让 Loader 认到新的一行：
-
-```sh
-systemctl --user restart dsh-web.service
-```
+这条命令把它记成 `link:` 依赖、加进 profile 的 `dsh.profile.bundles`；profile 的
+`cordis.patch.yml` 里不再有本插件的行。启停在 GUI 的 Plugins 页按 bundle 做。
 
 `lib/` 不进版本管理，克隆后必须构建一次（见下）。
 
